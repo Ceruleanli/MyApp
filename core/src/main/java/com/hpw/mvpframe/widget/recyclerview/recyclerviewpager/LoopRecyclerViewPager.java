@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 
 public class LoopRecyclerViewPager extends RecyclerViewPager {
-
+//循环的viewpager
     public LoopRecyclerViewPager(Context context) {
         this(context, null);
     }
