@@ -1,0 +1,38 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'android-apt'
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
+    defaultConfig {
+        applicationId "com.hpw.myapp"
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    apt 'com.jakewharton:butterknife-compiler:8.2.1'
+
+    compile 'com.qiniu.pili:pili-android-qos:0.8.+'
+
+    compile 'com.android.support:appcompat-v7:25.1.1'
+    testCompile 'junit:junit:4.12'
+
+    compile 'com.isseiaoki:simplecropview:1.0.13'
+    compile files('libs/AMap3DMap_4.1.3_AMapNavi_1.9.4_AMapSearch_4.0.0_AMapLocation_3.3.0_20170118.jar')
+    compile project(':core')
+    compile files('libs/pldroid-player-1.4.0.jar')
+    compile files('libs/tbs_sdk_thirdapp_v2.4.0.1073_36840_sharewithdownload_obfs_20161011_194834.jar')
+}

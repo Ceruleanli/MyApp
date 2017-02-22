@@ -1,0 +1,6 @@
+Model 是数据源层。比如数据库接口或者远程服务器的api。
+
+Presenter是从Model中获取数据并提供给View的层，Presenter还负责处理后台任务。
+
+MVP是一个将后台任务和activities/views/fragment分离的方法，
+让它们独立于绝大多数跟生命周期相关的事件。
