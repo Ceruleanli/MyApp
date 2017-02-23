@@ -12,6 +12,8 @@ import com.tbruyelle.rxpermissions.RxPermissions;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
+import rx.functions.Action1;
+
 
 /**
  * Created by hpw on 16/10/28.
@@ -30,14 +32,30 @@ public class FlashActivity extends CoreBaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState) {
+//        Observable.timer(2000, TimeUnit.MILLISECONDS)
+//                .compose(RxPermissions.getInstance(this).ensureEach(Manifest.permission.READ_PHONE_STATE, Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE))
+//                .compose(RxUtil.rxSchedulerHelper())
+//                .subscribe(permission -> {
+//                    if (permission.granted) {
+//                        startActivity(ZhihuMainActivity.class);
+//                        finish();
+//                    }
+//                });
+
+
         Observable.timer(2000, TimeUnit.MILLISECONDS)
                 .compose(RxPermissions.getInstance(this).ensureEach(Manifest.permission.READ_PHONE_STATE, Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE))
                 .compose(RxUtil.rxSchedulerHelper())
-                .subscribe(permission -> {
-                    if (permission.granted) {
-                        startActivity(ZhihuMainActivity.class);
+                .subscribe(new Action1<RxPermissions>() {
+                    @Override
+                    public void call(RxPermissions permission) {
+                        if (permission.granted) { // 在android 6.0之前会默认返回true
+                            // 已经获取权限
+                            startActivity(ZhihuMainActivity.class);
                         finish();
+                        }
                     }
+
                 });
     }
 }
